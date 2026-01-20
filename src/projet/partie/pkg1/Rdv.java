@@ -38,5 +38,12 @@ public String versFichier(LocalDateTime date) {
            client.getNumero_client() + "\n" +
            prestation.versFichier();
 }
-    
+    public Client getClient() {
+        return client;
+    }
+
+    // Je te conseille d'ajouter aussi celui-ci pour la suite (affichage/fichier) :
+    public Prestation getPrestation() {
+        return prestation;
+    }
 }
