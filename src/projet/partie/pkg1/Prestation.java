@@ -106,8 +106,12 @@ public double nettoyageInterieur() {
 
 }
     
-    
-    
+   public char getCategorieVehicule() {
+    return categorie_vehicule;
+} 
+    public String versFichier() {
+        return "TypeInconnu:0"; 
+    }
     
     
     

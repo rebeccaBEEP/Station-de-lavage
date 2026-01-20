@@ -38,7 +38,11 @@ public class PrestationTresSale extends Prestation{
   public double nettoyage(){
       return prelavage()+lavage()+ sechage() +nettoyageInterieur()+surcout();
   } 
-    
+    @Override
+public String versFichier() {
+    // Format : catégorie:typeSalissure:prix
+    return getCategorieVehicule() + ":" + typeSalissure + ":" + (int)nettoyage();
+}
     
     
     

@@ -33,6 +33,11 @@ public class PrestationExpress extends Prestation  {
         }
         return total;
     }
+
+    @Override
+public String versFichier() {
+    return getCategorieVehicule() + ":" + nettoyageInterieur + ":" + (int)nettoyage();
+}
     
     
     

@@ -24,4 +24,9 @@ public class PrestationSale extends Prestation {
   public double nettoyage() {
         return prelavage() + lavage() + sechage() + 30;
     }  
+    @Override
+public String versFichier() {
+    // Format : catégorie:prix
+    return getCategorieVehicule() + ":" + (int)nettoyage();
+}
 }

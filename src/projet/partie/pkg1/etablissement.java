@@ -480,32 +480,42 @@ public class etablissement {
     public void depuisFichierRDV(String nomF) {
         try (BufferedReader br = new BufferedReader(new FileReader(nomF))) {
             String lig;
-            while ((lig = br.readLine()) != null) { // Lit la date (Ligne 1)
+            while ((lig = br.readLine()) != null) {
+        
                 LocalDateTime date = LocalDateTime.parse(lig);
-                
-                int idCli = Integer.parseInt(br.readLine().trim()); // Lit l'ID (Ligne 2)
-                
-                // Recherche du client pour recréer le lien
+                int idCli = Integer.parseInt(br.readLine().trim());
+                String pStr = br.readLine(); 
                 Client cl = null;
-                for(int i=0; i<nombre_client; i++) if(listeClient[i].getNumero_client() == idCli) cl = listeClient[i];
+                for(int i=0; i<nombre_client; i++) {
+                    if(listeClient[i] != null && listeClient[i].getNumero_client() == idCli) {
+                        cl = listeClient[i];
+                    }
+                }
                 
-                String pStr = br.readLine(); // Lit la prestation (Ligne 3)
-                String[] t = pStr.split(":");
-                char cat = t[0].trim().charAt(0);
-                
-                // Recréation du RDV selon le type
-                if (t.length == 3) { // Express ou Très Sale
-                    String milieu = t[1].trim();
-                    if (milieu.equals("true") || milieu.equals("false")) 
-                        ajouter1(cl, date, cat, Boolean.parseBoolean(milieu));
-                    else 
-                        ajouter3(cl, date, cat, Integer.parseInt(milieu));
-                } else { // Sale
-                    ajouter2(cl, date, cat);
+                if (cl != null) {
+                    String[] t = pStr.split(":");
+                    char cat = t[0].trim().charAt(0);
+                    
+                    if (t.length == 2) { 
+                        ajouter2(cl, date, cat);
+                    } 
+                    else if (t.length == 3) {
+                        
+                        String milieu = t[1].trim();
+                        if (milieu.equalsIgnoreCase("true") || milieu.equalsIgnoreCase("false")) {
+                            
+                            ajouter1(cl, date, cat, Boolean.parseBoolean(milieu));
+                        } else {
+                            
+                            ajouter3(cl, date, cat, Integer.parseInt(milieu));
+                        }
+                    }
                 }
             }
             System.out.println("RDV chargés.");
-        } catch (Exception e) { System.out.println("Fichier RDV vide ou absent."); }
+        } catch (Exception e) { 
+            System.out.println("Fichier RDV vide, absent ou corrompu : " + e.getMessage()); 
+        }
     }
     
     

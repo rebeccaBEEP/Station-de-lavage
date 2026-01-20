@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package projet.partie.pkg1;
+import java.time.LocalDateTime;
 
 /**
  *
@@ -31,6 +32,11 @@ public String toString() {
            " - Prix total : " + prix + " €";
 }
             
-    
+
+public String versFichier(LocalDateTime date) {
+    return date.toString() + "\n" +
+           client.getNumero_client() + "\n" +
+           prestation.versFichier();
+}
     
 }
